@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672" # RabbitMQ server
+      - "15672:15672" # Management console
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_config:/etc/rabbitmq
+      - rabbitmq_logs:/var/log/rabbitmq
+    networks:
+      - support-chat-app-network
+
+volumes:
+  rabbitmq_data:
+  rabbitmq_config:
+  rabbitmq_logs:
+
+networks:
+  support-chat-app-network:

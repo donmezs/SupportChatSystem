@@ -40,7 +40,7 @@ public class AgentQueueManager : IAgentQueueManager
         channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
         var consumer = new EventingBasicConsumer(channel);
-        consumer.Received += (model, ea) =>
+        consumer.Received += async (model, ea) =>
         {
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
@@ -62,6 +62,8 @@ public class AgentQueueManager : IAgentQueueManager
                 agentQueueConsumer.ProcessMessageAsync(message, agentId, chatSessionId);
             }
         };
+
+        channel.BasicConsume(queue: queueName, autoAck: false, consumer: consumer);
 
         _agentChannels.TryAdd(agentId, channel);
 

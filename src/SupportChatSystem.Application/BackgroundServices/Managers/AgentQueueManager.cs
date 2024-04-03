@@ -59,7 +59,7 @@ public class AgentQueueManager : IAgentQueueManager
             using (var scope = _serviceProvider.CreateScope())
             {
                 var agentQueueConsumer = scope.ServiceProvider.GetRequiredService<IAgentQueueConsumer>();
-                agentQueueConsumer.ProcessMessageAsync(message, agentId, chatSessionId);
+                await agentQueueConsumer.ProcessMessageAsync(message, agentId, chatSessionId);
             }
         };
 

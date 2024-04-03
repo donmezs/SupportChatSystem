@@ -27,7 +27,7 @@ public class ChatSessionManagementServiceTests
             _agentManagementServiceMock.Object);
 
     [Fact]
-    public async Task TestAssignChatSessionAsyncWithAvailableAgent()
+    public async Task AssignChatSessionAsync_AgentAvailable_ReturnsAssignedTrue()
     {
         // Arrange
         var agentName = "Test Agent";
@@ -70,7 +70,7 @@ public class ChatSessionManagementServiceTests
     }
 
     [Fact]
-    public async Task TestAssignChatSessionAsyncQueueFull()
+    public async Task AssignChatSessionAsync_QueueFull_ReturnsAssignedFalse()
     {
         // Arrange
         var chatSessionId = Guid.NewGuid();

@@ -156,7 +156,7 @@ public class ChatSessionManagementService : IChatSessionManagementService
             return (false, null);
         }
 
-        foreach (var agent in overflowTeam.Agents.OrderBy(a => Guid.NewGuid())) // Implement your selection logic here
+        foreach (var agent in overflowTeam.Agents.OrderBy(a => Guid.NewGuid()))
         {
             if (_agentManagementService.IsAgentAvailable(agent))
             {
